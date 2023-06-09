@@ -2,6 +2,8 @@
 
 ## Links
 
+https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-multiple
+
 https://github.com/swiss-ssi-group/AzureADVerifiableCredentialsAspNetCore
 
 https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/decentralized-identifier-overview
