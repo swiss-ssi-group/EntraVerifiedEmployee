@@ -1,0 +1,61 @@
+﻿@page
+@model IssuerVerifiableEmployee.Pages.Employees.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h3>Create Employee</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <div class="form-group">
+                <label class="control-label">UserName</label>
+                <input asp-for="Employee.UserName" class="form-control" />
+                <span asp-validation-for="Employee.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Name</label>
+                <input asp-for="Employee.Name" class="form-control" />
+                <span asp-validation-for="Employee.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input asp-for="Employee.FirstName" class="form-control" />
+                <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date of Birth</label>
+                <input asp-for="Employee.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Employee.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">License Type</label>
+                <input asp-for="Employee.LicenseType" class="form-control" />
+                <span asp-validation-for="Employee.LicenseType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <br />
+                    <label asp-for="Employee.Valid">
+                        <input class="big_checkbox" asp-for="Employee.Valid" />
+                        @Html.DisplayNameFor(model => model.Employee.Valid)
+                    </label>
+                </div>
+            </div> 
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="User" asp-route-id="@Model.UserName">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
