@@ -4,7 +4,7 @@ namespace IssuerVerifiableEmployee.Services.GraphServices;
 
 public class EmailService
 {
-    MessageAttachmentsCollectionPage MessageAttachmentsCollectionPage = new();
+    readonly MessageAttachmentsCollectionPage MessageAttachmentsCollectionPage = new();
 
     public Message CreateStandardEmail(string recipient, string header, string body)
     {
