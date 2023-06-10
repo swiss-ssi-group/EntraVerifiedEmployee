@@ -20,8 +20,9 @@ public class EmployeeCredentialsModel : PageModel
 
     public async Task OnGetAsync()
     {
+        var oid = User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
         var user = await _microsoftGraphDelegatedClient
-            .GetGraphApiUser(HttpContext.User?.Identity?.Name);
+            .GetGraphApiUser(oid!.Value);
 
         if (user != null)
         {
