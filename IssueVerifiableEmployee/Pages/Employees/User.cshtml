@@ -28,16 +28,16 @@
 @foreach (var item in Model.Employee) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                @Html.DisplayFor(modelItem => item.DisplayName)
             </td>
             <td>
                 @item.IssuedAt.ToString("MM/dd/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.GivenName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.JobTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LicenseType)

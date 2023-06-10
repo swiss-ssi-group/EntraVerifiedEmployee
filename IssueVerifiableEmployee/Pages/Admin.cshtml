@@ -15,10 +15,10 @@
     <thead class="thead-light">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Employees[0].UserName)
+                @Html.DisplayNameFor(model => model.Employees[0].DisplayName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employees[0].LicenseType)
+                @Html.DisplayNameFor(model => model.Employees[0].JobTitle)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Employees[0].IssuedAt)
@@ -31,10 +31,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
+                    @Html.DisplayFor(modelItem => item.DisplayName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LicenseType)
+                    @Html.DisplayFor(modelItem => item.JobTitle)
                 </td>
                 <td>
                      @Html.DisplayFor(modelItem => item.IssuedAt)

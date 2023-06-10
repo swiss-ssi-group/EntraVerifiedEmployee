@@ -35,9 +35,9 @@ public class EditModel : PageModel
         Employee = new UpdateEmployee
         {
             Id = employee.Id,
-            FirstName = employee.FirstName,
-            Name = employee.Name,
-            UserName = employee.UserName,
+            FirstName = employee.JobTitle,
+            Name = employee.GivenName,
+            UserName = employee.DisplayName,
             Valid = employee.Valid
         };
 
@@ -77,7 +77,7 @@ public class EditModel : PageModel
                 }
             }
 
-            return RedirectToPage("./User", new { id = existingEmployee.UserName });
+            return RedirectToPage("./User", new { id = existingEmployee.DisplayName });
         }
 
         return BadRequest("No model");

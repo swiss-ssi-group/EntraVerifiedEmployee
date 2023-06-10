@@ -23,7 +23,7 @@ public class CreateModel : PageModel
 
     public IActionResult OnGet(string id)
     {
-        Employee.UserName = id;
+        Employee.DisplayName = id;
         return Page();
     }
 
@@ -40,6 +40,6 @@ public class CreateModel : PageModel
         _context.Employees.Add(Employee);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./User", new { id = Employee.UserName });
+        return RedirectToPage("./User", new { id = Employee.DisplayName });
     }
 }

@@ -6,13 +6,17 @@ public class Employee
 {
     [Key]
     public Guid Id { get; set; }
-    public string UserName { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
+    public string GivenName { get; set; } = string.Empty;
+    public string JobTitle { get; set; } = string.Empty;
+    public string PreferredLanguage { get; set; } = string.Empty;
+    public string Surname { get; set; } = string.Empty;
+    public string Mail { get; set; } = string.Empty;
+    public string RevocationId { get; set; } = string.Empty; // userPrincipalName
+    public string Photo { get; set; } = string.Empty;
+
     public DateTimeOffset IssuedAt { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string FirstName { get; set; } = string.Empty;
-    public DateTimeOffset DateOfBirth { get; set; }
     public string? Issuedby { get; set; } = string.Empty;
     public bool Valid { get; set; }
     public string VerifiableEmployeeCredentials { get; set; } = string.Empty;
-    public string LicenseType { get; set; } = string.Empty;
 }

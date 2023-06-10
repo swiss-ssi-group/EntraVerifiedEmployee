@@ -52,7 +52,7 @@ public class IssuerService
 
         var employee = await _employeeService.GetEmployee(context.User?.Identity?.Name);
 
-        payload.Claims.Name = $"{employee?.FirstName} {employee?.Name}  {employee?.UserName}";
+        payload.Claims.Name = $"{employee?.JobTitle} {employee?.GivenName}  {employee?.DisplayName}";
         payload.Claims.Details = $"Type: {employee?.LicenseType} IssuedAt: {employee?.IssuedAt:yyyy-MM-dd}";
 
         return payload;

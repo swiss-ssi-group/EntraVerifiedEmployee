@@ -17,7 +17,7 @@ public class EmployeeService
         if (!string.IsNullOrEmpty(username))
         {
             var employee = await _employeeDbContext.Employees.FirstOrDefaultAsync(
-                dl => dl.UserName == username && dl.Valid == true
+                dl => dl.DisplayName == username && dl.Valid == true
             );
 
             if (employee != null)
@@ -32,7 +32,7 @@ public class EmployeeService
     public async Task<Employee?> GetEmployee(string? username)
     {
         var employee = await _employeeDbContext.Employees.FirstOrDefaultAsync(
-            dl => dl.UserName == username && dl.Valid == true
+            dl => dl.DisplayName == username && dl.Valid == true
         );
 
         return employee;

@@ -29,7 +29,7 @@ public class UserModel : PageModel
 
         Employee = await _context.Employees
             .AsQueryable()
-            .Where(item => item.UserName == id)
+            .Where(item => item.DisplayName == id)
             .ToListAsync();
 
         return Page();
