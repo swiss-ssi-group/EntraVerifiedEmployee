@@ -1,8 +1,6 @@
-using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 
@@ -30,10 +28,13 @@ public class Startup
         services.AddScoped<TeamsService>();
         services.AddScoped<IssuerService>();
 
-        services.AddDatabaseDeveloperPageExceptionFilter();
+        services.AddDistributedMemoryCache();
 
         services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+            .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
+            .EnableTokenAcquisitionToCallDownstreamApi()
+            .AddMicrosoftGraph()
+            .AddDistributedTokenCaches();
 
         services.AddAuthorization(options =>
         {
@@ -41,7 +42,6 @@ public class Startup
             options.FallbackPolicy = options.DefaultPolicy;
         });
 
-        services.AddDistributedMemoryCache();
         services.AddSession(options =>
         {
             options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
