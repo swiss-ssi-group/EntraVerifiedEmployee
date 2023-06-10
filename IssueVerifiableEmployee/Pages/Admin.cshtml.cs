@@ -1,22 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using IssuerVerifiableEmployee.Persistence;
+using Microsoft.Graph;
+using IssuerVerifiableEmployee.Services.GraphServices;
 
 namespace IssuerVerifiableEmployee;
 
 public class AdminModel : PageModel
 {
-    private readonly EmployeeDbContext _context;
+    private readonly MicrosoftGraphDelegatedClient _microsoftGraphDelegatedClient;
 
-    public AdminModel(EmployeeDbContext context)
+    public AdminModel(MicrosoftGraphDelegatedClient microsoftGraphDelegatedClient)
     {
-        _context = context;
+        _microsoftGraphDelegatedClient = microsoftGraphDelegatedClient;
     }
 
     public List<Employee> Employees { get; set; } = new List<Employee>();
 
     public async Task OnGetAsync()
     {
-        Employees = await _context.Employees.ToListAsync();
+        //Employees = await _microsoftGraphDelegatedClient.GetUsers().ToListAsync();
     }
 }

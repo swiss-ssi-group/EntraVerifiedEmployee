@@ -1,4 +1,5 @@
 using IssuerVerifiableEmployee.Persistence;
+using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +25,12 @@ public class Startup
         });
 
         services.Configure<CredentialSettings>(Configuration.GetSection("CredentialSettings"));
-        services.AddScoped<EmployeeService>();
+        services.AddScoped<MicrosoftGraphDelegatedClient>();
+        services.AddScoped<EmailService>();
+        services.AddScoped<TeamsService>();
         services.AddScoped<IssuerService>();
 
         services.AddDatabaseDeveloperPageExceptionFilter();
-        services.AddDbContext<EmployeeDbContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
 
         services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));

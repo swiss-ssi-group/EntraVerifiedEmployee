@@ -1,4 +1,6 @@
+using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services;
+using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
@@ -13,19 +15,19 @@ public class IssuerService
     protected readonly CredentialSettings _credentialSettings;
     protected IMemoryCache _cache;
     protected readonly ILogger<IssuerService> _log;
-    private readonly EmployeeService _employeeService;
+    private readonly MicrosoftGraphDelegatedClient _microsoftGraphDelegatedClient;
 
     public IssuerService(IOptions<CredentialSettings> credentialSettings,
+        MicrosoftGraphDelegatedClient microsoftGraphDelegatedClient,
         IMemoryCache memoryCache,
-        ILogger<IssuerService> log,
-        EmployeeService employeeService)
+        ILogger<IssuerService> log)
     {
         _credentialSettings = credentialSettings.Value;
         _credentialSettings ??= new CredentialSettings();
 
         _cache = memoryCache;
         _log = log;
-        _employeeService = employeeService;
+        _microsoftGraphDelegatedClient = microsoftGraphDelegatedClient;
     }
 
     public async Task<IssuanceRequestPayload> GetIssuanceRequestPayloadAsync(HttpRequest request, HttpContext context)
@@ -50,12 +52,30 @@ public class IssuerService
         payload.Registration.ClientName = "Verifiable Credential Employee";
         payload.Authority = _credentialSettings.IssuerAuthority;
 
-        var employee = await _employeeService.GetEmployee(context.User?.Identity?.Name);
+        var user = await _microsoftGraphDelegatedClient
+            .GetGraphApiUser(context.User?.Identity?.Name);
 
-        payload.Claims.Name = $"{employee?.JobTitle} {employee?.GivenName}  {employee?.DisplayName}";
-        payload.Claims.Details = $"Type: {employee?.LicenseType} IssuedAt: {employee?.IssuedAt:yyyy-MM-dd}";
+        if (user != null)
+        {
+            var employee = new Employee
+            {
+                DisplayName = user.DisplayName,
+                GivenName = user.GivenName,
+                JobTitle = user.JobTitle,
+                Surname = user.Surname,
+                PreferredLanguage = user.PreferredLanguage,
+                Valid = user.AccountEnabled.GetValueOrDefault(),
+                Mail = user.Mail,
+                RevocationId = user.UserPrincipalName
+            };
 
-        return payload;
+            payload.Claims.Name = $"{employee?.JobTitle} {employee?.GivenName}  {employee?.DisplayName}";
+            payload.Claims.Details = $"Type: {employee?.GivenName} IssuedAt: {employee?.IssuedAt:yyyy-MM-dd}";
+
+            return payload;
+        }
+
+        throw new ArgumentNullException(nameof(user));
     }
 
     public async Task<(string Token, string Error, string ErrorDescription)> GetAccessToken()
