@@ -20,3 +20,6 @@ https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/
 
 https://github.com/Azure-Samples/active-directory-verifiable-credentials-dotnet
 
+https://aka.ms/mysecurityinfo
+
+https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
