@@ -59,18 +59,25 @@ public class IssuerService
         {
             var employee = new Employee
             {
-                DisplayName = user.DisplayName,
                 GivenName = user.GivenName,
-                JobTitle = user.JobTitle,
                 Surname = user.Surname,
-                PreferredLanguage = user.PreferredLanguage,
-                Valid = user.AccountEnabled.GetValueOrDefault(),
                 Mail = user.Mail,
-                RevocationId = user.UserPrincipalName
+                JobTitle = user.JobTitle,
+                //Photo = user.Photo,
+                DisplayName = user.DisplayName,
+                PreferredLanguage = user.PreferredLanguage,
+                RevocationId = user.UserPrincipalName,
+                Valid = user.AccountEnabled.GetValueOrDefault(),
             };
 
-            payload.Claims.Name = $"{employee?.JobTitle} {employee?.GivenName}  {employee?.DisplayName}";
-            payload.Claims.Details = $"Type: {employee?.GivenName} IssuedAt: {employee?.IssuedAt:yyyy-MM-dd}";
+            payload.Claims.GivenName = employee.GivenName;
+            payload.Claims.Surname = employee.Surname;
+            payload.Claims.Mail = employee.Mail;
+            payload.Claims.JobTitle = employee.JobTitle;
+            payload.Claims.Photo = employee.Photo;
+            payload.Claims.DisplayName = employee.DisplayName;
+            payload.Claims.PreferredLanguage = employee.PreferredLanguage;
+            payload.Claims.RevocationId = employee.RevocationId;
 
             return payload;
         }

@@ -12,8 +12,20 @@ public class CredentialsClaims
     /// <summary>
     /// attribute names need to match a claim from the id_token
     /// </summary>
-    [JsonPropertyName("given_name")]
-    public string Name { get; set; } = string.Empty;
-    [JsonPropertyName("family_name")]
-    public string Details { get; set; } = string.Empty;
+    [JsonPropertyName("givenName")]
+    public string GivenName { get; set; } = string.Empty;
+    [JsonPropertyName("surname")]
+    public string Surname { get; set; } = string.Empty;
+    [JsonPropertyName("mail")]
+    public string Mail { get; set; } = string.Empty;
+    [JsonPropertyName("jobTitle")]
+    public string JobTitle { get; set; } = string.Empty;
+    [JsonPropertyName("photo")] // "type": "image/jpg;base64url",
+    public string Photo { get; set; } = string.Empty;
+    [JsonPropertyName("displayName")]
+    public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("preferredLanguage")]
+    public string PreferredLanguage { get; set; } = string.Empty;
+    [JsonPropertyName("revocationId")]
+    public string RevocationId { get; set; } = string.Empty;
 }
