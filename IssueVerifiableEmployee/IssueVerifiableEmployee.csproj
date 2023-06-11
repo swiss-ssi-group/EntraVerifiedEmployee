@@ -28,4 +28,10 @@
     <Folder Include="Services\GraphServices\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testuserprofile.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

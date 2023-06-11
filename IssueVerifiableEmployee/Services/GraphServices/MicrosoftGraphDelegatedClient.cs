@@ -1,4 +1,5 @@
-﻿using Microsoft.Graph;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Graph;
 using Microsoft.Graph.SecurityNamespace;
 using System.Security.Cryptography;
 
@@ -16,6 +17,9 @@ public class MicrosoftGraphDelegatedClient
     public async Task<User?> GetGraphApiUser(string? oid)
     {
         if (oid == null) return null;
+
+        // only works if user has a photo (license)
+        var photo = await GetGraphApiProfilePhoto(oid);
 
         var user =  await _graphServiceClient.Users[oid]
             .Request()
@@ -40,10 +44,23 @@ public class MicrosoftGraphDelegatedClient
             .GetAsync();
 
         var pre = user.PreferredLanguage;
-        var photo = user.Photo;
+        var photo2 = user.Photo;
         var ac = user.AccountEnabled;
         var job = user.JobTitle;
         return user;
+    }
+
+    public async Task UploadPhotoAsync()
+    {
+        using (FileStream fs = System.IO.File.Open("testuserprofile.jfif", FileMode.Open))
+        {
+            var oid = "833a10f4-9e4c-4fc9-a9af-71848f3c0fa4";
+            var photoStream = await _graphServiceClient.Users[oid]
+                .Photo
+                .Content
+                .Request()
+                .PutAsync(fs); //users/{1}/photo/$value
+        }
     }
 
     public async Task<string> GetGraphApiProfilePhoto(string oid)

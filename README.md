@@ -15,6 +15,9 @@ https://graph.microsoft.com/v1.0/users/{oid}
 }
 ```
 
+// requires a license
+https://portal.office.com/account/?ref=MeControl#personalinfo
+
 https://learn.microsoft.com/en-us/graph/api/profilephoto-update?view=graph-rest-1.0&tabs=http
 
 Photo
