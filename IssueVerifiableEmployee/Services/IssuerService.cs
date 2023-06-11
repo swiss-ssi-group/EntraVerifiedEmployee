@@ -80,7 +80,7 @@ public class IssuerService
             payload.Claims.Surname = employee.Surname;
             payload.Claims.Mail = employee.Mail;
             payload.Claims.JobTitle = employee.JobTitle;
-            //payload.Claims.Photo = userData.Photo;
+            payload.Claims.Photo = userData.Photo;
             payload.Claims.DisplayName = employee.DisplayName;
             payload.Claims.PreferredLanguage = employee.PreferredLanguage;
             payload.Claims.RevocationId = employee.RevocationId;

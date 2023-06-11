@@ -20,8 +20,8 @@ public class CredentialsClaims
     public string Mail { get; set; } = string.Empty;
     [JsonPropertyName("jobTitle")]
     public string JobTitle { get; set; } = string.Empty;
-    //[JsonPropertyName("photo")] // "type": "image/jpg;base64url",
-    //public string Photo { get; set; } = string.Empty;
+    [JsonPropertyName("photo")] // "type": "image/jpg;base64url",
+    public string Photo { get; set; } = string.Empty;
     [JsonPropertyName("displayName")]
     public string DisplayName { get; set; } = string.Empty;
     [JsonPropertyName("preferredLanguage")]
