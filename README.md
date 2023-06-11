@@ -36,6 +36,8 @@ https://github.com/Azure-Samples/active-directory-verifiable-credentials-dotnet
 
 https://aka.ms/mysecurityinfo
 
+https://fontawesome.com/
+
 https://developer.microsoft.com/en-us/graph/graph-explorer?tenant=damienbodsharepoint.onmicrosoft.com
 
 https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
