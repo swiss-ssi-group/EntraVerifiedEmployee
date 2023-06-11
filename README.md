@@ -1,5 +1,19 @@
 # Issue Azure AD Verifiable Employee
 
+
+```
+ngrok http https://localhost:5001
+```
+
+PATCH 
+
+https://graph.microsoft.com/v1.0/users/{oid}
+```
+{
+    "preferredLanguage": "de-CH",
+    "jobTitle": "HR"
+}
+```
 ## Links
 
 https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-multiple
@@ -21,5 +35,7 @@ https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/
 https://github.com/Azure-Samples/active-directory-verifiable-credentials-dotnet
 
 https://aka.ms/mysecurityinfo
+
+https://developer.microsoft.com/en-us/graph/graph-explorer?tenant=damienbodsharepoint.onmicrosoft.com
 
 https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0

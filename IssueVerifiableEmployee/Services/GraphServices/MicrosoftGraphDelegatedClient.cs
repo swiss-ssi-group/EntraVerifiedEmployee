@@ -16,11 +16,33 @@ public class MicrosoftGraphDelegatedClient
     {
         if (oid == null) return null;
 
-        var user1 =  await _graphServiceClient.Users[oid]
+        var user =  await _graphServiceClient.Users[oid]
             .Request()
+            // .Filter($"userType eq 'Member'")
+            .Select(u => new
+            {
+                u.Id,
+                u.GivenName,
+                u.Surname,
+                u.JobTitle,
+                u.DisplayName,
+                u.Mail,
+                u.EmployeeId,
+                u.EmployeeType,
+                u.BusinessPhones,
+                u.MobilePhone,
+                u.AccountEnabled,
+                u.Photo,
+                u.PreferredLanguage,
+                u.UserPrincipalName
+            })
             .GetAsync();
 
-        return user1;
+        var pre = user.PreferredLanguage;
+        var photo = user.Photo;
+        var ac = user.AccountEnabled;
+        var job = user.JobTitle;
+        return user;
     }
 
     public async Task SendEmailAsync(Message message)
