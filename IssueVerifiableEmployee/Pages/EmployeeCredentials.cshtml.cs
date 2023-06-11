@@ -21,10 +21,12 @@ public class EmployeeCredentialsModel : PageModel
     public async Task OnGetAsync()
     {
         var oid = User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
-        var user = await _microsoftGraphDelegatedClient
+        var userData = await _microsoftGraphDelegatedClient
             .GetGraphApiUser(oid!.Value);
 
-        if (user != null)
+        var user = userData.User;
+
+        if (userData.User != null && user != null && userData.Photo != null)
         {
             Employee = new Employee
             {
@@ -35,14 +37,15 @@ public class EmployeeCredentialsModel : PageModel
                 PreferredLanguage = user.PreferredLanguage,
                 Valid = user.AccountEnabled.GetValueOrDefault(),
                 Mail = user.Mail,
-                RevocationId = user.UserPrincipalName
+                RevocationId = user.UserPrincipalName,
+                Photo = userData.Photo
             };
             EmployeeMessage = "Add your employee credentials to your wallet";
             HasEmployee = true;
         }
         else
         {
-            EmployeeMessage = "You have no valid employee";
+            EmployeeMessage = $"You have no valid employee, userData.Photo: {userData.Photo == null}";
         }
     }
 }

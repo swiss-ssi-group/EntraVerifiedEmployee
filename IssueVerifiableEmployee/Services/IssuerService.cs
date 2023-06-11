@@ -56,10 +56,13 @@ public class IssuerService
         payload.Authority = _credentialSettings.IssuerAuthority;
 
         var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
-        var user = await _microsoftGraphDelegatedClient
+        
+        var userData = await _microsoftGraphDelegatedClient
             .GetGraphApiUser(oid!.Value);
 
-        if (user != null)
+        var user = userData.User;
+
+        if (userData.User != null && user != null && userData.Photo != null)
         {
             var employee = new Employee
             {
@@ -91,7 +94,6 @@ public class IssuerService
 
     public async Task<(string Token, string Error, string ErrorDescription)> GetAccessToken()
     {
-
         // You can run this sample using ClientSecret or Certificate. The code will differ only when instantiating the IConfidentialClientApplication
         var isUsingClientSecret = _credentialSettings.AppUsesClientSecret(_credentialSettings);
 

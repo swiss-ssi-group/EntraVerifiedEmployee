@@ -14,9 +14,9 @@ public class MicrosoftGraphDelegatedClient
         _graphServiceClient = graphServiceClient;
     }
 
-    public async Task<User?> GetGraphApiUser(string? oid)
+    public async Task<(User? User ,string? Photo)> GetGraphApiUser(string? oid)
     {
-        if (oid == null) return null;
+        if (oid == null) return (null,null);
 
         // only works if user has a photo (license)
         var photo = await GetGraphApiProfilePhoto(oid);
@@ -47,20 +47,7 @@ public class MicrosoftGraphDelegatedClient
         var photo2 = user.Photo;
         var ac = user.AccountEnabled;
         var job = user.JobTitle;
-        return user;
-    }
-
-    public async Task UploadPhotoAsync()
-    {
-        using (FileStream fs = System.IO.File.Open("testuserprofile.jfif", FileMode.Open))
-        {
-            var oid = "833a10f4-9e4c-4fc9-a9af-71848f3c0fa4";
-            var photoStream = await _graphServiceClient.Users[oid]
-                .Photo
-                .Content
-                .Request()
-                .PutAsync(fs); //users/{1}/photo/$value
-        }
+        return (user, photo);
     }
 
     public async Task<string> GetGraphApiProfilePhoto(string oid)
