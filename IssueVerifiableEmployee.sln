@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueVerifiableEmployee", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDB46CE4-08AF-4F39-9931-9C7E98B32279}"
 	ProjectSection(SolutionItems) = preProject
+		employee-no-photo-display-settings.json = employee-no-photo-display-settings.json
+		employee-no-photo-rules-settings.json = employee-no-photo-rules-settings.json
 		README.md = README.md
 	EndProjectSection
 EndProject
