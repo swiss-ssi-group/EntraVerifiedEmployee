@@ -1,0 +1,55 @@
+{
+  "locale": "en-US",
+  "card": {
+    "title": "Employee basic",
+    "issuedBy": "damienbodsharepoint",
+    "backgroundColor": "#555fff",
+    "textColor": "#000000",
+    "logo": {
+      "uri": "https://raw.githubusercontent.com/swiss-ssi-group/AzureADVerifiableCredentialsAspNetCore/main/IssuerDrivingLicense/wwwroot/user-regular.svg",
+      "description": "damienbodsharepoint employee basic"
+    },
+    "description": "employee"
+  },
+  "consent": {
+    "title": "Employee",
+    "instructions": "Employee"
+  },
+  "claims": [
+    {
+      "claim": "vc.credentialSubject.givenName",
+      "label": "Name",
+      "type": "String"
+    },
+    {
+      "claim": "vc.credentialSubject.surname",
+      "label": "Surname",
+      "type": "String"
+    },
+    {
+      "claim": "vc.credentialSubject.mail",
+      "label": "Mail",
+      "type": "String"
+    },
+    {
+      "claim": "vc.credentialSubject.jobTitle",
+      "label": "Job Title",
+      "type": "String"
+    },
+    {
+      "claim": "vc.credentialSubject.displayName",
+      "label": "Display Name",
+      "type": "String"
+    },
+    {
+      "claim": "vc.credentialSubject.preferredLanguage",
+      "label": "Preferred language",
+      "type": "String"
+    },
+    {
+      "claim": "vc.credentialSubject.revocationId",
+      "label": "Revocation Id",
+      "type": "String"
+    }
+  ]
+}

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Graph;
-using Microsoft.Graph.SecurityNamespace;
-using System.Security.Cryptography;
+﻿using Microsoft.Graph;
+using System.Net;
 
 namespace IssuerVerifiableEmployee.Services.GraphServices;
 
+/// <summary>
+/// https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/credential-design
+/// </summary>
 public class MicrosoftGraphDelegatedClient
 {
     private readonly GraphServiceClient _graphServiceClient;
@@ -43,13 +44,14 @@ public class MicrosoftGraphDelegatedClient
             })
             .GetAsync();
 
-        var pre = user.PreferredLanguage;
-        var photo2 = user.Photo;
-        var ac = user.AccountEnabled;
-        var job = user.JobTitle;
         return (user, photo);
     }
 
+    /// <summary>
+    /// https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-verifiedemployee
+    /// UrlEncode(Base64Encode(photo)) format. To use the photo, 
+    /// the verifier application has to 
+    /// Base64Decode(UrlDecode(photo)).
     public async Task<string> GetGraphApiProfilePhoto(string oid)
     {
         var photo = string.Empty;
@@ -58,7 +60,13 @@ public class MicrosoftGraphDelegatedClient
             .Content.Request().GetAsync())
         {
             byte[] photoByte = ((MemoryStream)photoStream).ToArray();
-            photo = Convert.ToBase64String(photoByte);
+
+            // not working => Unhandled exceptionfailed to decode
+            photo = WebUtility.UrlEncode(Convert.ToBase64String(photoByte));
+            // not working
+            //photo = Convert.ToBase64String(photoByte);
+            // not working
+            //photo = Base64UrlEncoder.Encode(photoByte);
         }
 
         return photo;

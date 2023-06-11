@@ -3,7 +3,6 @@ using IssuerVerifiableEmployee.Services;
 using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 using System.Globalization;
@@ -81,7 +80,7 @@ public class IssuerService
             payload.Claims.Surname = employee.Surname;
             payload.Claims.Mail = employee.Mail;
             payload.Claims.JobTitle = employee.JobTitle;
-            payload.Claims.Photo = employee.Photo;
+            payload.Claims.Photo = userData.Photo;
             payload.Claims.DisplayName = employee.DisplayName;
             payload.Claims.PreferredLanguage = employee.PreferredLanguage;
             payload.Claims.RevocationId = employee.RevocationId;
