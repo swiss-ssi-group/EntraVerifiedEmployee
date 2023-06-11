@@ -3,6 +3,7 @@ using IssuerVerifiableEmployee.Services;
 using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 using System.Globalization;
@@ -33,15 +34,8 @@ public class IssuerService
     public async Task<IssuanceRequestPayload> GetIssuanceRequestPayloadAsync(HttpRequest request, HttpContext context)
     {
         var payload = new IssuanceRequestPayload();
-        var length = 4;
-        var pinMaxValue = (int)Math.Pow(10, length) - 1;
-        var randomNumber = RandomNumberGenerator.GetInt32(1, pinMaxValue);
-        var newpin = string.Format(CultureInfo.InvariantCulture,
-            "{0:D" + length.ToString(CultureInfo.InvariantCulture) + "}", randomNumber);
 
-        payload.Pin.Length = length;
-        payload.Pin.Value = newpin;
-        payload.CredentialsType = "VerifiableEmployee";
+        payload.CredentialsType = "VerifiedEmployee";
         payload.Manifest = _credentialSettings.CredentialManifest;
 
         var host = GetRequestHostName(request);
@@ -52,8 +46,9 @@ public class IssuerService
         payload.Registration.ClientName = "Verifiable Credential Employee";
         payload.Authority = _credentialSettings.IssuerAuthority;
 
+        var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
         var user = await _microsoftGraphDelegatedClient
-            .GetGraphApiUser(context.User?.Identity?.Name);
+            .GetGraphApiUser(oid!.Value);
 
         if (user != null)
         {
