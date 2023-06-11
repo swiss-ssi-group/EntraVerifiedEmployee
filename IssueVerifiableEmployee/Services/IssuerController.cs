@@ -59,6 +59,7 @@ public class IssuerController : ControllerBase
 
                 var res = await _httpClient.PostAsJsonAsync(_credentialSettings.Endpoint, payload);
 
+                //var test = await res.Content.ReadAsStringAsync();
                 var response = await res.Content.ReadFromJsonAsync<IssuanceResponse>();
 
                 if (response == null)
@@ -69,6 +70,11 @@ public class IssuerController : ControllerBase
                 if (res.StatusCode == HttpStatusCode.Created)
                 {
                     _log.LogTrace("succesfully called Request API");
+
+                    if (payload.Pin.Value != null)
+                    {
+                        response.Pin = payload.Pin.Value;
+                    }
 
                     response.Id = payload.Callback.State;
 

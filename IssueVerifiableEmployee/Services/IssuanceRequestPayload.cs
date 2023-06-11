@@ -20,7 +20,8 @@ public class IssuanceRequestPayload
     public string CredentialsType { get; set; } = string.Empty;
     [JsonPropertyName("manifest")]
     public string Manifest { get; set; } = string.Empty;
-    
+    [JsonPropertyName("pin")]
+    public Pin Pin { get; set; } = new Pin();
     [JsonPropertyName("claims")]
     public CredentialsClaims Claims { get; set; } = new CredentialsClaims();
 }
@@ -45,4 +46,12 @@ public class Registration
 {
     [JsonPropertyName("clientName")]
     public string ClientName { get; set; } = string.Empty;
+}
+
+public class Pin
+{
+    [JsonPropertyName("value")]
+    public string Value { get; set; } = string.Empty;
+    [JsonPropertyName("length")]
+    public int Length { get; set; } = 4;
 }
