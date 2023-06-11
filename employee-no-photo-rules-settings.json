@@ -5,43 +5,43 @@
         "mapping": [
           {
             "outputClaim": "givenName",
-            "required": false,
+            "required": true,
             "inputClaim": "givenName",
             "indexed": false
           },
           {
             "outputClaim": "surname",
-            "required": false,
+            "required": true,
             "inputClaim": "surname",
             "indexed": false
           },
           {
             "outputClaim": "mail",
-            "required": false,
+            "required": true,
             "inputClaim": "mail",
             "indexed": false
           },
           {
             "outputClaim": "jobTitle",
-            "required": false,
+            "required": true,
             "inputClaim": "jobTitle",
             "indexed": false
           },
           {
             "outputClaim": "displayName",
-            "required": false,
+            "required": true,
             "inputClaim": "displayName",
             "indexed": false
           },
           {
             "outputClaim": "preferredLanguage",
-            "required": false,
+            "required": true,
             "inputClaim": "preferredLanguage",
             "indexed": false
           },
           {
             "outputClaim": "revocationId",
-            "required": false,
+            "required": true,
             "inputClaim": "revocationId",
             "indexed": false
           }

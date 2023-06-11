@@ -5,8 +5,9 @@
     "issuedBy": "damienbodsharepoint",
     "backgroundColor": "#555fff",
     "textColor": "#000000",
-    "logo": {
-      "uri": "https://raw.githubusercontent.com/swiss-ssi-group/AzureADVerifiableCredentialsAspNetCore/main/IssuerDrivingLicense/wwwroot/user-regular.svg",
+    "logo": { // png works, svg does not
+      "uri": "https://raw.githubusercontent.com/swiss-ssi-group/TrinsicAspNetCore/main/src/NationalDrivingLicense/wwwroot/ndl_car_01.png",
+      //"uri": "https://raw.githubusercontent.com/swiss-ssi-group/AzureADVerifiableCredentialsAspNetCore/main/IssuerDrivingLicense/wwwroot/user-regular.svg",
       "description": "damienbodsharepoint employee basic"
     },
     "description": "employee"
