@@ -14,6 +14,13 @@ https://graph.microsoft.com/v1.0/users/{oid}
     "jobTitle": "HR"
 }
 ```
+
+https://learn.microsoft.com/en-us/graph/api/profilephoto-update?view=graph-rest-1.0&tabs=http
+
+Photo
+
+https://graph.microsoft.com/v1.0/users/{oid}/photo
+
 ## Links
 
 https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-multiple

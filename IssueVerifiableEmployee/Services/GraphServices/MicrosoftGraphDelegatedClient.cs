@@ -1,5 +1,6 @@
 ﻿using Microsoft.Graph;
 using Microsoft.Graph.SecurityNamespace;
+using System.Security.Cryptography;
 
 namespace IssuerVerifiableEmployee.Services.GraphServices;
 
@@ -43,6 +44,20 @@ public class MicrosoftGraphDelegatedClient
         var ac = user.AccountEnabled;
         var job = user.JobTitle;
         return user;
+    }
+
+    public async Task<string> GetGraphApiProfilePhoto(string oid)
+    {
+        var photo = string.Empty;
+        // Get user photo
+        using (var photoStream = await _graphServiceClient.Users[oid].Photo
+            .Content.Request().GetAsync())
+        {
+            byte[] photoByte = ((MemoryStream)photoStream).ToArray();
+            photo = Convert.ToBase64String(photoByte);
+        }
+
+        return photo;
     }
 
     public async Task SendEmailAsync(Message message)
