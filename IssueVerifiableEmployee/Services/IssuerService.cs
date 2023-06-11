@@ -43,7 +43,7 @@ public class IssuerService
         payload.Pin.Length = length;
         payload.Pin.Value = newpin;
   
-        payload.CredentialsType = "VerifiedEmployee";
+        payload.CredentialsType = "EmployeeNoPhoto";
         payload.Manifest = _credentialSettings.CredentialManifest;
 
         var host = GetRequestHostName(request);
@@ -80,7 +80,7 @@ public class IssuerService
             payload.Claims.Surname = employee.Surname;
             payload.Claims.Mail = employee.Mail;
             payload.Claims.JobTitle = employee.JobTitle;
-            payload.Claims.Photo = userData.Photo;
+            //payload.Claims.Photo = userData.Photo;
             payload.Claims.DisplayName = employee.DisplayName;
             payload.Claims.PreferredLanguage = employee.PreferredLanguage;
             payload.Claims.RevocationId = employee.RevocationId;
