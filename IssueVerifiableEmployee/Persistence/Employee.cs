@@ -16,7 +16,5 @@ public class Employee
     public string Photo { get; set; } = string.Empty;
 
     public DateTimeOffset IssuedAt { get; set; }
-    public string? Issuedby { get; set; } = string.Empty;
-    public bool Valid { get; set; }
-    public string VerifiableEmployeeCredentials { get; set; } = string.Empty;
+    public bool AccountEnabled { get; set; }
 }

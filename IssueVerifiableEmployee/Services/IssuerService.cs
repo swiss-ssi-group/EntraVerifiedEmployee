@@ -77,7 +77,7 @@ public class IssuerService
                 DisplayName = user.DisplayName,
                 PreferredLanguage = user.PreferredLanguage,
                 RevocationId = user.UserPrincipalName,
-                Valid = user.AccountEnabled.GetValueOrDefault(),
+                AccountEnabled = user.AccountEnabled.GetValueOrDefault(),
             };
 
             payload.Claims.GivenName = employee.GivenName;

@@ -1,7 +1,6 @@
 using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Graph;
 
 namespace IssuerVerifiableEmployee.Pages;
 
@@ -35,10 +34,10 @@ public class EmployeeCredentialsModel : PageModel
                 JobTitle = user.JobTitle,
                 Surname = user.Surname,
                 PreferredLanguage = user.PreferredLanguage,
-                Valid = user.AccountEnabled.GetValueOrDefault(),
                 Mail = user.Mail,
                 RevocationId = user.UserPrincipalName,
-                Photo = userData.Photo
+                Photo = userData.Photo,
+                AccountEnabled = user.AccountEnabled.GetValueOrDefault()
             };
             EmployeeMessage = "Add your employee credentials to your wallet";
             HasEmployee = true;
