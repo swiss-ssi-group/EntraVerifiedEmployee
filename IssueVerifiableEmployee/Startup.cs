@@ -24,8 +24,6 @@ public class Startup
 
         services.Configure<CredentialSettings>(Configuration.GetSection("CredentialSettings"));
         services.AddScoped<MicrosoftGraphDelegatedClient>();
-        services.AddScoped<EmailService>();
-        services.AddScoped<TeamsService>();
         services.AddScoped<IssuerService>();
 
         services.AddDistributedMemoryCache();
