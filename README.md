@@ -1,5 +1,6 @@
 # Issue Azure AD Verifiable Employee
 
+[![.NET](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml)
 
 ```
 ngrok http https://localhost:5001
@@ -16,6 +17,7 @@ https://graph.microsoft.com/v1.0/users/{oid}
 ```
 
 // requires a license
+
 https://portal.office.com/account/?ref=MeControl#personalinfo
 
 https://learn.microsoft.com/en-us/graph/api/profilephoto-update?view=graph-rest-1.0&tabs=http
