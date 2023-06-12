@@ -43,7 +43,7 @@ public class IssuerController : ControllerBase
     {
         try
         {
-            var payload = await _issuerService.GetIssuanceRequestPayloadAsync(Request, HttpContext);
+            var payload = await _issuerService.GetIssuanceRequestPayloadAsync(Request);
             try
             {
                 var (Token, Error, ErrorDescription) = await _issuerService.GetAccessToken();

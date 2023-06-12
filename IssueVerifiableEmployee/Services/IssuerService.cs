@@ -30,7 +30,7 @@ public class IssuerService
         _microsoftGraphDelegatedClient = microsoftGraphDelegatedClient;
     }
 
-    public async Task<IssuanceRequestPayload> GetIssuanceRequestPayloadAsync(HttpRequest request, HttpContext context)
+    public async Task<IssuanceRequestPayload> GetIssuanceRequestPayloadAsync(HttpRequest request)
     {
         var payload = new IssuanceRequestPayload();
 
