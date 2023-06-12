@@ -43,7 +43,7 @@ public class IssuerService
         payload.Pin.Length = length;
         payload.Pin.Value = newpin;
   
-        payload.CredentialsType = "EmployeeNoPhoto";
+        payload.CredentialsType = "VerifiedEmployee";
         payload.Manifest = _credentialSettings.CredentialManifest;
 
         var host = GetRequestHostName(request);
