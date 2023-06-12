@@ -23,21 +23,19 @@ public class EmployeeCredentialsModel : PageModel
         var userData = await _microsoftGraphDelegatedClient
             .GetGraphApiUser(oid!.Value);
 
-        var user = userData.User;
-
-        if (userData.User != null && user != null && userData.Photo != null)
+        if (userData.User != null && userData.Photo != null)
         {
             Employee = new Employee
             {
-                DisplayName = user.DisplayName,
-                GivenName = user.GivenName,
-                JobTitle = user.JobTitle,
-                Surname = user.Surname,
-                PreferredLanguage = user.PreferredLanguage,
-                Mail = user.Mail,
-                RevocationId = user.UserPrincipalName,
+                DisplayName = userData.User.DisplayName,
+                GivenName = userData.User.GivenName,
+                JobTitle = userData.User.JobTitle,
+                Surname = userData.User.Surname,
+                PreferredLanguage = userData.User.PreferredLanguage,
+                Mail = userData.User.Mail,
+                RevocationId = userData.User.UserPrincipalName,
                 Photo = userData.Photo,
-                AccountEnabled = user.AccountEnabled.GetValueOrDefault()
+                AccountEnabled = userData.User.AccountEnabled.GetValueOrDefault()
             };
             EmployeeMessage = "Add your employee credentials to your wallet";
             HasEmployee = true;

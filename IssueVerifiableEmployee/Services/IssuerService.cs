@@ -60,39 +60,24 @@ public class IssuerService
 
         var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
         
-        var userData = await _microsoftGraphDelegatedClient
+        var (User, Photo) = await _microsoftGraphDelegatedClient
             .GetGraphApiUser(oid!.Value);
 
-        var user = userData.User;
-
-        if (userData.User != null && user != null && userData.Photo != null)
+        if (User != null && Photo != null)
         {
-            var employee = new Employee
-            {
-                GivenName = user.GivenName,
-                Surname = user.Surname,
-                Mail = user.Mail,
-                JobTitle = user.JobTitle,
-                //Photo = user.Photo,
-                DisplayName = user.DisplayName,
-                PreferredLanguage = user.PreferredLanguage,
-                RevocationId = user.UserPrincipalName,
-                AccountEnabled = user.AccountEnabled.GetValueOrDefault(),
-            };
-
-            payload.Claims.GivenName = employee.GivenName;
-            payload.Claims.Surname = employee.Surname;
-            payload.Claims.Mail = employee.Mail;
-            payload.Claims.JobTitle = employee.JobTitle;
-            payload.Claims.Photo = userData.Photo;
-            payload.Claims.DisplayName = employee.DisplayName;
-            payload.Claims.PreferredLanguage = employee.PreferredLanguage;
-            payload.Claims.RevocationId = employee.RevocationId;
+            payload.Claims.GivenName = User.GivenName;
+            payload.Claims.Surname = User.Surname;
+            payload.Claims.Mail = User.Mail;
+            payload.Claims.JobTitle = User.JobTitle;
+            payload.Claims.Photo = Photo;
+            payload.Claims.DisplayName = User.DisplayName;
+            payload.Claims.PreferredLanguage = User.PreferredLanguage;
+            payload.Claims.RevocationId = User.UserPrincipalName;
 
             return payload;
         }
 
-        throw new ArgumentNullException(nameof(user));
+        throw new ArgumentNullException(nameof(User));
     }
 
     public async Task<(string Token, string Error, string ErrorDescription)> GetAccessToken()
