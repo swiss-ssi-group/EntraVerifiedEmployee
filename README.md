@@ -2,9 +2,13 @@
 
 [![.NET](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml)
 
+### Local debugging, required for callback
+
 ```
 ngrok http https://localhost:5001
 ```
+
+### Update the preferredLanguage
 
 PATCH 
 
@@ -16,18 +20,17 @@ https://graph.microsoft.com/v1.0/users/{oid}
 }
 ```
 
-// requires a license
+### Photo with a license
 
 https://portal.office.com/account/?ref=MeControl#personalinfo
 
 https://learn.microsoft.com/en-us/graph/api/profilephoto-update?view=graph-rest-1.0&tabs=http
 
-Photo
-
 https://graph.microsoft.com/v1.0/users/{oid}/photo
 
-Or you can update the profile photo in the Azure AD portal without a license
+### Photo
 
+You can update the profile photo in the Azure AD portal without a license in the users basic profile settings.
 
 ## Links
 
