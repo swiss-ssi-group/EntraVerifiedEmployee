@@ -32,7 +32,7 @@ public class Startup
 
         services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
-            .EnableTokenAcquisitionToCallDownstreamApi()
+            .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read"})
             .AddMicrosoftGraph()
             .AddDistributedTokenCaches();
 

@@ -51,3 +51,5 @@ https://fontawesome.com/
 https://developer.microsoft.com/en-us/graph/graph-explorer?tenant=damienbodsharepoint.onmicrosoft.com
 
 https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
+
+https://github.com/Azure-Samples/VerifiedEmployeeIssuance

@@ -26,6 +26,6 @@ public class CredentialsClaims
     public string DisplayName { get; set; } = string.Empty;
     [JsonPropertyName("preferredLanguage")]
     public string PreferredLanguage { get; set; } = string.Empty;
-    [JsonPropertyName("revocationId")]
+    [JsonPropertyName("userPrincipalName")]
     public string RevocationId { get; set; } = string.Empty;
 }

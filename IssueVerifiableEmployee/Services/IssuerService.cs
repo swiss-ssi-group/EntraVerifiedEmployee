@@ -44,7 +44,11 @@ public class IssuerService
         payload.Pin.Value = newpin;
   
         payload.CredentialsType = "VerifiedEmployee";
-        payload.Manifest = _credentialSettings.CredentialManifest;
+
+        //get the manifest from the appsettings, this is the URL to the Verified Employee credential created in the azure portal. 
+        //the ? parameter is needed for the myaccount page to work with the Verified Employee credential. This will force the system
+        //to use accept an idtokenhint payload and ignore the accesstoken flow which is the default for employment credentials
+        payload.Manifest = $"{_credentialSettings.CredentialManifest}{"?manifestType=claimInjection"}";
 
         var host = GetRequestHostName(request);
         payload.Callback.State = Guid.NewGuid().ToString();
