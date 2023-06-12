@@ -14,7 +14,5 @@ public class Employee
     public string Mail { get; set; } = string.Empty;
     public string RevocationId { get; set; } = string.Empty; // userPrincipalName
     public string Photo { get; set; } = string.Empty;
-
-    public DateTimeOffset IssuedAt { get; set; }
     public bool AccountEnabled { get; set; }
 }
