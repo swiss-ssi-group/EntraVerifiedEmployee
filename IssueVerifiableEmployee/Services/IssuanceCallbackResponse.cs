@@ -4,8 +4,8 @@ namespace IssuerVerifiableEmployee.Services;
 
 public class IssuanceCallbackResponse
 {
-    [JsonPropertyName("code")]
-    public string Code { get; set; } = string.Empty;
+    [JsonPropertyName("requestStatus")]
+    public string RequestStatus { get; set; } = string.Empty;
     [JsonPropertyName("requestId")]
     public string RequestId { get; set; } = string.Empty;
     [JsonPropertyName("state")]
