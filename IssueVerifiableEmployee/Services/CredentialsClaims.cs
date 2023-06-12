@@ -7,9 +7,6 @@ namespace IssuerVerifiableEmployee.Services;
 /// </summary>
 public class CredentialsClaims
 {
-    /// <summary>
-    /// attribute names need to match a claim from the id_token
-    /// </summary>
     [JsonPropertyName("givenName")]
     public string GivenName { get; set; } = string.Empty;
     [JsonPropertyName("surname")]
