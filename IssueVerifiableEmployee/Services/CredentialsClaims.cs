@@ -3,9 +3,7 @@
 namespace IssuerVerifiableEmployee.Services;
 
 /// <summary>
-/// Application specific claims used in the payload of the issue request. 
-/// When using the id_token for the subject claims, the IDP needs to add the values to the id_token!
-/// The claims can be mapped to anything then.
+/// Verified Employee scheme
 /// </summary>
 public class CredentialsClaims
 {
