@@ -24,6 +24,9 @@ Photo
 
 https://graph.microsoft.com/v1.0/users/{oid}/photo
 
+Or you can update the profile photo in the Azure AD portal without a license
+
+
 ## Links
 
 https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-multiple
