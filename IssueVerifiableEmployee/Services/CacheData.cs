@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -18,9 +19,10 @@ public class CacheData
     {
         var cacheExpirationInDays = 1;
 
-        var options = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(cacheExpirationInDays));
+        var options = new DistributedCacheEntryOptions()
+            .SetSlidingExpiration(TimeSpan.FromDays(cacheExpirationInDays));
 
-        cache.SetString(key, System.Text.Json.JsonSerializer.Serialize(cacheData), options);
+        cache.SetString(key, JsonSerializer.Serialize(cacheData), options);
     }
 
     public static CacheData? GetFromCache(string key, IDistributedCache cache)
@@ -28,7 +30,7 @@ public class CacheData
         var item = cache.GetString(key);
         if (item != null)
         {
-            return System.Text.Json.JsonSerializer.Deserialize<CacheData>(item);
+            return JsonSerializer.Deserialize<CacheData>(item);
         }
 
         return null;

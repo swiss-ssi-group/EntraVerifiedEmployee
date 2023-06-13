@@ -19,12 +19,6 @@ public class CredentialSettings
     public string VerifierAuthority { get; set; } = string.Empty;
     public string VcApiCallbackApiKey { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Checks if the sample is configured for using ClientSecret or Certificate. This method is just for the sake of this sample.
-    /// You won't need this verification in your production application since you will be authenticating in AAD using one mechanism only.
-    /// </summary>
-    /// <param name="config">Configuration from appsettings.json</param>
-    /// <returns></returns>
     public bool AppUsesClientSecret(CredentialSettings config)
     {
         string clientSecretPlaceholderValue = "[Enter here a client secret for your application]";
