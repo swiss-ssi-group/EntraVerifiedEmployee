@@ -1,10 +1,8 @@
-using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services;
 using IssuerVerifiableEmployee.Services.GraphServices;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
-using Microsoft.Identity.Web;
 using System.Globalization;
 using System.Security.Cryptography;
 
