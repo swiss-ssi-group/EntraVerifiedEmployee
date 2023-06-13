@@ -1,4 +1,4 @@
-# Issue Azure AD Verifiable Employee
+# Issue Azure AD Verified Employee
 
 [![.NET](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml)
 
