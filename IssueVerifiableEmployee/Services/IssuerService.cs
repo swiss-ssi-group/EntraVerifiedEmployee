@@ -60,7 +60,7 @@ public class IssuerService
 
         var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
         
-        var (User, Photo) = await _microsoftGraphDelegatedClient
+        var (User, Photo, Error) = await _microsoftGraphDelegatedClient
             .GetGraphApiUser(oid!.Value);
 
         if (User != null && Photo != null)

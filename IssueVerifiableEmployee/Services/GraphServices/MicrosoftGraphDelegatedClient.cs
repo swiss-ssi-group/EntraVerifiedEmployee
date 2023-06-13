@@ -12,12 +12,19 @@ public class MicrosoftGraphDelegatedClient
         _graphServiceClient = graphServiceClient;
     }
 
-    public async Task<(User? User ,string? Photo)> GetGraphApiUser(string? oid)
+    public async Task<(User? User ,string? Photo, string? Error)> GetGraphApiUser(string? oid)
     {
-        if (oid == null) return (null,null);
+        if (oid == null) return (null,null, "OID not defined");
 
-        // only works if user has a photo (license)
-        var photo = await GetGraphApiProfilePhoto(oid);
+        var photo = string.Empty;
+        try
+        {
+            photo = await GetGraphApiProfilePhoto(oid);
+        }
+        catch (Exception)
+        {
+            return (null, null, "User MUST have a photo, upload in the Azure portal user basic profile, or using office");
+        }
 
         var user =  await _graphServiceClient.Users[oid]
             .Request()
@@ -41,7 +48,12 @@ public class MicrosoftGraphDelegatedClient
             })
             .GetAsync();
 
-        return (user, photo);
+        if(user.PreferredLanguage == null)
+        {
+            return (null, null, "No Preferred Language defined for the user, add this please");
+        }
+
+        return (user, photo, null);
     }
 
     /// <summary>

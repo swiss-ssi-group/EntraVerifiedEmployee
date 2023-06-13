@@ -19,7 +19,8 @@ public class EmployeeCredentialsModel : PageModel
 
     public async Task OnGetAsync()
     {
-        var oid = User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
+        var oid = User.Claims.FirstOrDefault(t => t.Type == 
+            "http://schemas.microsoft.com/identity/claims/objectidentifier");
         
         var userData = await _microsoftGraphDelegatedClient
             .GetGraphApiUser(oid!.Value);
@@ -43,7 +44,7 @@ public class EmployeeCredentialsModel : PageModel
         }
         else
         {
-            EmployeeMessage = $"You have no valid employee, userData.Photo: {userData.Photo == null}";
+            EmployeeMessage = $"You have no valid employee, Error: {userData.Error}";
         }
     }
 }
