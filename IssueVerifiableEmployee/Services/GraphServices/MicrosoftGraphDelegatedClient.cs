@@ -47,6 +47,11 @@ public class MicrosoftGraphDelegatedClient
             return (null, null, "No Preferred Language defined for the user, add this please");
         }
 
+        if (user!.Mail == null)
+        {
+            return (null, null, "No Mail defined for the user, add this please");
+        }
+
         return (user, photo, null);
     }
 
