@@ -52,6 +52,16 @@ public class MicrosoftGraphDelegatedClient
             return (null, null, "No Mail defined for the user, add this please");
         }
 
+        if (user!.JobTitle == null)
+        {
+            return (null, null, "No JobTitle defined for the user, add this please");
+        }
+
+        if (user!.Surname == null)
+        {
+            return (null, null, "No Surname defined for the user, add this please");
+        }
+
         return (user, photo, null);
     }
 
