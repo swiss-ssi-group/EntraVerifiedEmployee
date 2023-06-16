@@ -1,5 +1,6 @@
 ﻿using IssuerVerifiableEmployee.Persistence;
 using Microsoft.Graph;
+using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Mail;
 
@@ -121,8 +122,8 @@ public class MicrosoftGraphDelegatedClient
             .Content.GetAsync())
         {
             byte[] photoByte = ((MemoryStream)photoStream!).ToArray();
-            photo = WebUtility.UrlEncode(Convert.ToBase64String(photoByte));
-            //photo = Base64UrlEncoder.Encode(photoByte);
+            //photo = WebUtility.UrlEncode(Convert.ToBase64String(photoByte));
+            photo = Base64UrlEncoder.Encode(photoByte);
         }
 
         return photo;

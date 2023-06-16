@@ -1,6 +1,8 @@
 using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services.GraphServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IssuerVerifiableEmployee.Pages;
 
@@ -11,6 +13,9 @@ public class EmployeeCredentialsModel : PageModel
     public string EmployeeMessage { get; set; } = "Loading credentials";
     public bool HasEmployee { get; set; }
     public Employee? Employee { get; set; }
+
+    [BindProperty]
+    public byte[]? Photo { get; set; }
 
     public EmployeeCredentialsModel(MicrosoftGraphDelegatedClient microsoftGraphDelegatedClient)
     {
@@ -41,6 +46,7 @@ public class EmployeeCredentialsModel : PageModel
             };
             EmployeeMessage = "Add your employee credentials to your wallet";
             HasEmployee = true;
+            Photo = Base64UrlEncoder.DecodeBytes(Employee.Photo);
         }
         else
         {
