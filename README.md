@@ -84,3 +84,5 @@ https://developer.microsoft.com/en-us/graph/graph-explorer?tenant=damienbodshare
 https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
 
 https://github.com/Azure-Samples/VerifiedEmployeeIssuance
+
+https://github.com/AzureAD/microsoft-identity-web/blob/jmprieur/Graph5/src/Microsoft.Identity.Web.GraphServiceClient/Readme.md#replace-the-nuget-packages

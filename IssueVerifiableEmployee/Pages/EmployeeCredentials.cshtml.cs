@@ -29,13 +29,13 @@ public class EmployeeCredentialsModel : PageModel
         {
             Employee = new Employee
             {
-                DisplayName = userData.User.DisplayName,
-                GivenName = userData.User.GivenName,
-                JobTitle = userData.User.JobTitle,
-                Surname = userData.User.Surname,
-                PreferredLanguage = userData.User.PreferredLanguage,
-                Mail = userData.User.Mail,
-                RevocationId = userData.User.UserPrincipalName,
+                DisplayName = userData.User.DisplayName!,
+                GivenName = userData.User.GivenName!,
+                JobTitle = userData.User.JobTitle!,
+                Surname = userData.User.Surname!,
+                PreferredLanguage = userData.User.PreferredLanguage!,
+                Mail = userData.User.Mail!,
+                RevocationId = userData.User.UserPrincipalName!,
                 Photo = userData.Photo,
                 AccountEnabled = userData.User.AccountEnabled.GetValueOrDefault()
             };

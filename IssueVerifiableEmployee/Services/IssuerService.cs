@@ -63,14 +63,14 @@ public class IssuerService
 
         if (User != null && Photo != null)
         {
-            payload.Claims.GivenName = User.GivenName;
-            payload.Claims.Surname = User.Surname;
-            payload.Claims.Mail = User.Mail;
-            payload.Claims.JobTitle = User.JobTitle;
+            payload.Claims.GivenName = User.GivenName!;
+            payload.Claims.Surname = User.Surname!;
+            payload.Claims.Mail = User.Mail!;
+            payload.Claims.JobTitle = User.JobTitle!;
             payload.Claims.Photo = Photo;
-            payload.Claims.DisplayName = User.DisplayName;
-            payload.Claims.PreferredLanguage = User.PreferredLanguage;
-            payload.Claims.RevocationId = User.UserPrincipalName;
+            payload.Claims.DisplayName = User.DisplayName!;
+            payload.Claims.PreferredLanguage = User.PreferredLanguage!;
+            payload.Claims.RevocationId = User.UserPrincipalName!;
 
             return payload;
         }

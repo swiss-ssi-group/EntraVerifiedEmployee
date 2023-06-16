@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using System.Net;
 
 namespace IssuerVerifiableEmployee.Services.GraphServices;
@@ -26,29 +27,22 @@ public class MicrosoftGraphDelegatedClient
             return (null, null, "User MUST have a photo, upload in the Azure portal user basic profile, or using office");
         }
 
-        var user =  await _graphServiceClient.Users[oid]
-            .Request()
-            // .Filter($"userType eq 'Member'")
-            .Select(u => new
-            {
-                u.Id,
-                u.GivenName,
-                u.Surname,
-                u.JobTitle,
-                u.DisplayName,
-                u.Mail,
-                u.EmployeeId,
-                u.EmployeeType,
-                u.BusinessPhones,
-                u.MobilePhone,
-                u.AccountEnabled,
-                u.Photo,
-                u.PreferredLanguage,
-                u.UserPrincipalName
-            })
-            .GetAsync();
 
-        if(user.PreferredLanguage == null)
+        var result = await _graphServiceClient.Users.GetAsync();
+
+
+        var user =  await _graphServiceClient.Users[oid]
+            .GetAsync((requestConfiguration) =>
+            {
+                requestConfiguration.QueryParameters.Select = new string[] { 
+                    "id", "givenName", "surname", "jobTitle", "displayName",
+                    "mail",  "employeeId", "employeeType",
+                    "mobilePhone", "accountEnabled", "photo", "preferredLanguage",
+                    "userPrincipalName", "identities"};
+                requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
+            });
+
+        if(user!.PreferredLanguage == null)
         {
             return (null, null, "No Preferred Language defined for the user, add this please");
         }
@@ -65,9 +59,9 @@ public class MicrosoftGraphDelegatedClient
     {
         var photo = string.Empty;
         using (var photoStream = await _graphServiceClient.Users[oid].Photo
-            .Content.Request().GetAsync())
+            .Content.GetAsync())
         {
-            byte[] photoByte = ((MemoryStream)photoStream).ToArray();
+            byte[] photoByte = ((MemoryStream)photoStream!).ToArray();
             photo = WebUtility.UrlEncode(Convert.ToBase64String(photoByte));
             //photo = Base64UrlEncoder.Encode(photoByte);
         }
