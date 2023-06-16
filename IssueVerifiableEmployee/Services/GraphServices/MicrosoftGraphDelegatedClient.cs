@@ -1,5 +1,5 @@
-﻿using Microsoft.Graph;
-using Microsoft.Graph.Models;
+﻿using IssuerVerifiableEmployee.Persistence;
+using Microsoft.Graph;
 using System.Net;
 
 namespace IssuerVerifiableEmployee.Services.GraphServices;
@@ -13,9 +13,9 @@ public class MicrosoftGraphDelegatedClient
         _graphServiceClient = graphServiceClient;
     }
 
-    public async Task<(User? User ,string? Photo, string? Error)> GetGraphApiUser(string? oid)
+    public async Task<(Employee? Employee, string? Error)> GetEmployee(string? oid)
     {
-        if (oid == null) return (null,null, "OID not defined");
+        if (oid == null) return (null, "OID not defined");
 
         var photo = string.Empty;
         try
@@ -24,19 +24,15 @@ public class MicrosoftGraphDelegatedClient
         }
         catch (Exception)
         {
-            return (null, null, "User MUST have a photo, upload in the Azure portal user basic profile, or using office");
+            return (null, "User MUST have a photo, upload in the Azure portal user basic profile, or using office");
         }
-
-
-        var result = await _graphServiceClient.Users.GetAsync();
-
 
         var user =  await _graphServiceClient.Users[oid]
             .GetAsync((requestConfiguration) =>
             {
                 requestConfiguration.QueryParameters.Select = new string[] { 
                     "id", "givenName", "surname", "jobTitle", "displayName",
-                    "mail",  "employeeId", "employeeType",
+                    "mail",  "employeeId", "employeeType", "otherMails",
                     "mobilePhone", "accountEnabled", "photo", "preferredLanguage",
                     "userPrincipalName", "identities"};
                 requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
@@ -44,25 +40,64 @@ public class MicrosoftGraphDelegatedClient
 
         if(user!.PreferredLanguage == null)
         {
-            return (null, null, "No Preferred Language defined for the user, add this please");
-        }
-
-        if (user!.Mail == null)
-        {
-            return (null, null, "No Mail defined for the user, add this please");
+            return (null, "No Preferred Language defined for the user, add this please");
         }
 
         if (user!.JobTitle == null)
         {
-            return (null, null, "No JobTitle defined for the user, add this please");
+            return (null, "No JobTitle defined for the user, add this please");
         }
 
         if (user!.Surname == null)
         {
-            return (null, null, "No Surname defined for the user, add this please");
+            return (null, "No Surname defined for the user, add this please");
         }
 
-        return (user, photo, null);
+        if (user!.GivenName == null)
+        {
+            return (null, "No GivenName defined for the user, add this please");
+        }
+
+        if (user!.DisplayName == null)
+        {
+            return (null, "No DisplayName defined for the user, add this please");
+        }
+
+        if (user!.UserPrincipalName == null)
+        {
+            return (null, "No UserPrincipalName defined for the user, add this please");
+        }
+
+        var employee = new Employee
+        {
+            DisplayName = user.DisplayName,
+            GivenName = user.GivenName,
+            JobTitle = user.JobTitle,
+            Surname = user.Surname,
+            PreferredLanguage = user.PreferredLanguage,
+            RevocationId = user.UserPrincipalName,
+            Photo = photo,
+            AccountEnabled = user.AccountEnabled.GetValueOrDefault()
+        };
+
+        if (user.Mail != null)
+        {
+            employee.Mail = user.Mail;
+        }
+        else
+        {
+            var otherMail = user.OtherMails!.FirstOrDefault();
+            if (otherMail != null)
+            {
+                employee.Mail = otherMail;
+            }
+            else
+            {
+                return (null, "No Mail defined for the user, add this please");
+            }
+        }
+
+        return (employee, null);
     }
 
     /// <summary>

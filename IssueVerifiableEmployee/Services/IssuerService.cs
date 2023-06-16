@@ -58,24 +58,24 @@ public class IssuerService
 
         var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
         
-        var (User, Photo, Error) = await _microsoftGraphDelegatedClient
-            .GetGraphApiUser(oid!.Value);
+        var (Employee, Error) = await _microsoftGraphDelegatedClient
+            .GetEmployee(oid!.Value);
 
-        if (User != null && Photo != null)
+        if (Employee != null)
         {
-            payload.Claims.GivenName = User.GivenName!;
-            payload.Claims.Surname = User.Surname!;
-            payload.Claims.Mail = User.Mail!;
-            payload.Claims.JobTitle = User.JobTitle!;
-            payload.Claims.Photo = Photo;
-            payload.Claims.DisplayName = User.DisplayName!;
-            payload.Claims.PreferredLanguage = User.PreferredLanguage!;
-            payload.Claims.RevocationId = User.UserPrincipalName!;
+            payload.Claims.GivenName = Employee.GivenName;
+            payload.Claims.Surname = Employee.Surname;
+            payload.Claims.Mail = Employee.Mail;
+            payload.Claims.JobTitle = Employee.JobTitle;
+            payload.Claims.Photo = Employee.Photo;
+            payload.Claims.DisplayName = Employee.DisplayName;
+            payload.Claims.PreferredLanguage = Employee.PreferredLanguage;
+            payload.Claims.RevocationId = Employee.RevocationId;
 
             return payload;
         }
 
-        throw new ArgumentNullException(nameof(User));
+        throw new ArgumentNullException(nameof(Employee));
     }
 
     public async Task<(string Token, string Error, string ErrorDescription)> GetAccessToken()

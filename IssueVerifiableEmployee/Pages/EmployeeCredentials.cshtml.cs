@@ -22,29 +22,29 @@ public class EmployeeCredentialsModel : PageModel
         var oid = User.Claims.FirstOrDefault(t => t.Type == 
             "http://schemas.microsoft.com/identity/claims/objectidentifier");
         
-        var userData = await _microsoftGraphDelegatedClient
-            .GetGraphApiUser(oid!.Value);
+        var employeeData = await _microsoftGraphDelegatedClient
+            .GetEmployee(oid!.Value);
 
-        if (userData.User != null && userData.Photo != null)
+        if (employeeData.Employee != null)
         {
             Employee = new Employee
             {
-                DisplayName = userData.User.DisplayName!,
-                GivenName = userData.User.GivenName!,
-                JobTitle = userData.User.JobTitle!,
-                Surname = userData.User.Surname!,
-                PreferredLanguage = userData.User.PreferredLanguage!,
-                Mail = userData.User.Mail!,
-                RevocationId = userData.User.UserPrincipalName!,
-                Photo = userData.Photo,
-                AccountEnabled = userData.User.AccountEnabled.GetValueOrDefault()
+                DisplayName = employeeData.Employee.DisplayName!,
+                GivenName = employeeData.Employee.GivenName!,
+                JobTitle = employeeData.Employee.JobTitle!,
+                Surname = employeeData.Employee.Surname!,
+                PreferredLanguage = employeeData.Employee.PreferredLanguage!,
+                Mail = employeeData.Employee.Mail!,
+                RevocationId = employeeData.Employee.RevocationId!,
+                Photo = employeeData.Employee.Photo,
+                AccountEnabled = employeeData.Employee.AccountEnabled
             };
             EmployeeMessage = "Add your employee credentials to your wallet";
             HasEmployee = true;
         }
         else
         {
-            EmployeeMessage = $"You have no valid employee, Error: {userData.Error}";
+            EmployeeMessage = $"You have no valid employee, Error: {employeeData.Error}";
         }
     }
 }
