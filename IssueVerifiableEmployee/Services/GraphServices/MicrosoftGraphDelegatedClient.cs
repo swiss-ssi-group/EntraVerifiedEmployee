@@ -2,9 +2,7 @@
 using Microsoft.Graph;
 using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
-using System.Net;
 using System.Net.Mail;
-using System.Security.Cryptography;
 
 namespace IssuerVerifiableEmployee.Services.GraphServices;
 
