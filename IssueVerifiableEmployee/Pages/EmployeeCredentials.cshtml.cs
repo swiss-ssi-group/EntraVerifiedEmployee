@@ -14,6 +14,7 @@ public class EmployeeCredentialsModel : PageModel
     public string EmployeeMessage { get; set; } = "Loading credentials";
     public bool HasEmployee { get; set; }
     public Employee? Employee { get; set; }
+    public bool PreferredLanguageMissing { get; set; } = false;
 
     [BindProperty]
     public byte[]? Photo { get; set; }
@@ -51,6 +52,10 @@ public class EmployeeCredentialsModel : PageModel
         else
         {
             EmployeeMessage = $"You have no valid employee, Error: {employeeData.Error}";
+            if(employeeData.Error!.Contains("Preferred Language"))
+            {
+                PreferredLanguageMissing = true;
+            }
         }
     }
 }
