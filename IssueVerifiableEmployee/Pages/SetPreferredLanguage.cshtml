@@ -2,3 +2,18 @@
 @model IssueVerifiableEmployee.Pages.SetPreferredLanguageModel
 @{
 }
+
+
+<div class="card">
+    <h5 class="card-header"></h5>
+    <div class="card-body">
+        <p class="card-text">DisplayName: <span id="userDisplayName"></span></p>
+
+        <form method="post">
+            <input type="text" asp-for="PreferredLanguage" />
+            <div class="form-group">
+                <button type="submit" class="btn-secondary">Set your Preferred Language</button>
+            </div>
+        </form>
+    </div>
+</div>

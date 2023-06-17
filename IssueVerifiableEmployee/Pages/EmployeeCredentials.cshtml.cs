@@ -1,5 +1,6 @@
 using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services.GraphServices;
+using IssueVerifiableEmployee;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.IdentityModel.Tokens;
@@ -24,8 +25,7 @@ public class EmployeeCredentialsModel : PageModel
 
     public async Task OnGetAsync()
     {
-        var oid = User.Claims.FirstOrDefault(t => t.Type == 
-            "http://schemas.microsoft.com/identity/claims/objectidentifier");
+        var oid = User.Claims.FirstOrDefault(t => t.Type == Consts.OID_TYPE);
         
         var employeeData = await _microsoftGraphDelegatedClient
             .GetEmployee(oid!.Value);

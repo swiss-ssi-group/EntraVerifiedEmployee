@@ -18,25 +18,25 @@ namespace IssueVerifiableEmployee.Pages
 
         public async Task OnGetAsync()
         {
-            var oid = User.Claims.FirstOrDefault(t => t.Type ==
-            "http://schemas.microsoft.com/identity/claims/objectidentifier");
+            var oid = User.Claims.FirstOrDefault(t => t.Type == Consts.OID_TYPE);
 
             var employeeData = await _microsoftGraphDelegatedClient
                 .GetEmployee(oid!.Value);
 
-            if(employeeData.Employee!.PreferredLanguage != null)
+            if (employeeData.Employee != null)
             {
                 PreferredLanguage = employeeData.Employee.PreferredLanguage;
             }
         }
 
-        public async Task OnPostAsync() 
+        public async Task<IActionResult> OnPostAsync()
         {
-            var oid = User.Claims.FirstOrDefault(t => t.Type ==
-            "http://schemas.microsoft.com/identity/claims/objectidentifier");
+            var oid = User.Claims.FirstOrDefault(t => t.Type == Consts.OID_TYPE);
 
             await _microsoftGraphDelegatedClient
                 .SetPreferredLanguage(oid!.Value, PreferredLanguage);
+
+            return Page();
         }
     }
 }

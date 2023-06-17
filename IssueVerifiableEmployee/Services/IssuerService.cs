@@ -1,5 +1,6 @@
 using IssuerVerifiableEmployee.Services;
 using IssuerVerifiableEmployee.Services.GraphServices;
+using IssueVerifiableEmployee;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
@@ -56,7 +57,7 @@ public class IssuerService
         payload.Registration.ClientName = "Verifiable Credential Employee";
         payload.Authority = _credentialSettings.IssuerAuthority;
 
-        var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier");
+        var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == Consts.OID_TYPE);
         
         var (Employee, Error) = await _microsoftGraphDelegatedClient
             .GetEmployee(oid!.Value);
