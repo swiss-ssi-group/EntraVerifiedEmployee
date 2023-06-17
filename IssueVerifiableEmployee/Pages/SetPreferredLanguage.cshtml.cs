@@ -16,8 +16,27 @@ namespace IssueVerifiableEmployee.Pages
             _microsoftGraphDelegatedClient = microsoftGraphDelegatedClient;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
+            var oid = User.Claims.FirstOrDefault(t => t.Type ==
+            "http://schemas.microsoft.com/identity/claims/objectidentifier");
+
+            var employeeData = await _microsoftGraphDelegatedClient
+                .GetEmployee(oid!.Value);
+
+            if(employeeData.Employee!.PreferredLanguage != null)
+            {
+                PreferredLanguage = employeeData.Employee.PreferredLanguage;
+            }
+        }
+
+        public async Task OnPostAsync() 
+        {
+            var oid = User.Claims.FirstOrDefault(t => t.Type ==
+            "http://schemas.microsoft.com/identity/claims/objectidentifier");
+
+            await _microsoftGraphDelegatedClient
+                .SetPreferredLanguage(oid!.Value, PreferredLanguage);
         }
     }
 }

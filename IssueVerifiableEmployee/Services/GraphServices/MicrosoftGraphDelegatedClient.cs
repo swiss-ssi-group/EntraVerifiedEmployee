@@ -1,8 +1,10 @@
 ﻿using IssuerVerifiableEmployee.Persistence;
 using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography;
 
 namespace IssuerVerifiableEmployee.Services.GraphServices;
 
@@ -152,6 +154,15 @@ public class MicrosoftGraphDelegatedClient
             return false; // Double dot or dot at end of user part.
 
         return true;
+    }
+
+    public async Task SetPreferredLanguage(string oid, string preferredLanguage)
+    {
+        await _graphServiceClient.Users[oid].PatchAsync(
+            new User
+            {
+                PreferredLanguage = preferredLanguage
+            });
     }
 }
 
