@@ -1,4 +1,4 @@
-﻿namespace IssueVerifiableEmployee
+﻿namespace IssuerVerifiableEmployee
 {
     public static class Consts
     {

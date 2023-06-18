@@ -1,6 +1,5 @@
 using IssuerVerifiableEmployee.Persistence;
 using IssuerVerifiableEmployee.Services.GraphServices;
-using IssueVerifiableEmployee;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.IdentityModel.Tokens;

@@ -1,6 +1,5 @@
 using IssuerVerifiableEmployee.Services;
 using IssuerVerifiableEmployee.Services.GraphServices;
-using IssueVerifiableEmployee;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
