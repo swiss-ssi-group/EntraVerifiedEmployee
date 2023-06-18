@@ -122,7 +122,6 @@ public class MicrosoftGraphDelegatedClient
             .Content.GetAsync())
         {
             byte[] photoByte = ((MemoryStream)photoStream!).ToArray();
-            //photo = WebUtility.UrlEncode(Convert.ToBase64String(photoByte));
             photo = Base64UrlEncoder.Encode(photoByte);
         }
 
