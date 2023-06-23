@@ -52,6 +52,10 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseSecurityHeaders(SecurityHeadersDefinitions
+           .GetHeaderPolicyCollection(env.IsDevelopment()));
+
+
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
