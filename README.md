@@ -88,4 +88,6 @@ https://github.com/Azure-Samples/VerifiedEmployeeIssuance
 
 https://github.com/AzureAD/microsoft-identity-web/blob/jmprieur/Graph5/src/Microsoft.Identity.Web.GraphServiceClient/Readme.md#replace-the-nuget-packages
 
- https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
+https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
+
+https://issueverifiableemployee.azurewebsites.net/
