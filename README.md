@@ -1,4 +1,4 @@
-# Issue Azure AD Verified Employee
+# Issue Microsoft Entra Verified Employee credential
 
 [![.NET](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml)
 
