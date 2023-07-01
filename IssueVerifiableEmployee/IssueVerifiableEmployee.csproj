@@ -25,8 +25,4 @@
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders.TagHelpers" Version="0.19.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\GraphServices\" />
-  </ItemGroup>
-
 </Project>

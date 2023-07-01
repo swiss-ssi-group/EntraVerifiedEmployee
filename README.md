@@ -2,6 +2,8 @@
 
 [![.NET](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml/badge.svg)](https://github.com/swiss-ssi-group/AzureADVerifiableEmployee/actions/workflows/dotnet.yml)
 
+[Issue Employee verifiable credentials using Entra Verified ID and ASP.NET Core](https://damienbod.com)
+
 ### Local debugging, required for callback
 
 ```
