@@ -93,3 +93,5 @@ https://github.com/AzureAD/microsoft-identity-web/blob/jmprieur/Graph5/src/Micro
 https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
 
 https://issueverifiableemployee.azurewebsites.net/
+
+https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/
