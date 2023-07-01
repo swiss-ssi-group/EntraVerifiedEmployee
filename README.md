@@ -6,6 +6,8 @@
 
 ### Local debugging, required for callback
 
+Note: the public URL needs to be added to the redirct_url settings in the Azure App registration.
+
 ```
 ngrok http https://localhost:5001
 ```
