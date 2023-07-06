@@ -14,9 +14,7 @@ fetch('/api/issuer/issuance-request')
                 respIssuanceReq = JSON.parse(message);
                 if (/Android/i.test(navigator.userAgent)) {
                     console.log(`Android device! Using deep link (${respIssuanceReq.url}).`);
-                    window.location.href = respIssuanceReq.url; setTimeout(function () {
-                        window.location.href = "https://play.google.com/store/apps/details?id=com.azure.authenticator";
-                    }, 2000);
+                    window.location.href = respIssuanceReq.url;
                 } else if (/iPhone/i.test(navigator.userAgent)) {
                     console.log(`iOS device! Using deep link (${respIssuanceReq.url}).`);
                     window.location.replace(respIssuanceReq.url);
