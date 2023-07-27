@@ -4,6 +4,10 @@
 
 [Issue Employee verifiable credentials using Entra Verified ID and ASP.NET Core](https://damienbod.com/2023/07/03/issue-employee-verifiable-credentials-using-entra-verified-id-and-asp-net-core/)
 
+### History
+
+- 2023-07-27 Updated packages
+
 ### Local debugging, required for callback
 
 Note: the public URL needs to be added to the redirct_url settings in the Azure App registration.
