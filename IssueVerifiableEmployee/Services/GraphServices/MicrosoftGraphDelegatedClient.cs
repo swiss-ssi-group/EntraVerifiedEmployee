@@ -130,6 +130,13 @@ public class MicrosoftGraphDelegatedClient
         using var imageFromFile = new MagickImage(photoByte);
         // Sets the output format to jpeg
         imageFromFile.Format = MagickFormat.Jpeg;
+        var size = new MagickGeometry(400, 400);
+
+        // This will resize the image to a fixed size without maintaining the aspect ratio.
+        // Normally an image will be resized to fit inside the specified size.
+        //size.IgnoreAspectRatio = true;
+
+        imageFromFile.Resize(size);
 
         // Create byte array that contains a jpeg file
         var data = imageFromFile.ToByteArray();
