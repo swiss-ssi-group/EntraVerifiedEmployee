@@ -1,4 +1,5 @@
-﻿using IssuerVerifiableEmployee.Persistence;
+﻿using ImageMagick;
+using IssuerVerifiableEmployee.Persistence;
 using Microsoft.Graph;
 using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
@@ -118,12 +119,28 @@ public class MicrosoftGraphDelegatedClient
     public async Task<string> GetGraphApiProfilePhoto(string oid)
     {
         var photo = string.Empty;
+        byte[] photoByte;
+
         using (var photoStream = await _graphServiceClient.Users[oid].Photo
             .Content.GetAsync())
         {
-            byte[] photoByte = ((MemoryStream)photoStream!).ToArray();
-            photo = Base64UrlEncoder.Encode(photoByte);
+            photoByte = ((MemoryStream)photoStream!).ToArray();
         }
+
+        using var imageFromFile = new MagickImage(photoByte);
+        // Sets the output format to jpeg
+        imageFromFile.Format = MagickFormat.Jpeg;
+        var size = new MagickGeometry(400, 400);
+
+        // This will resize the image to a fixed size without maintaining the aspect ratio.
+        // Normally an image will be resized to fit inside the specified size.
+        //size.IgnoreAspectRatio = true;
+
+        imageFromFile.Resize(size);
+
+        // Create byte array that contains a jpeg file
+        var data = imageFromFile.ToByteArray();
+        photo = Base64UrlEncoder.Encode(data);
 
         return photo;
     }
