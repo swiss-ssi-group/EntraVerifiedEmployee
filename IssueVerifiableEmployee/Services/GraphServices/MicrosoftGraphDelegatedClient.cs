@@ -1,4 +1,5 @@
-﻿using IssuerVerifiableEmployee.Persistence;
+﻿using ImageMagick;
+using IssuerVerifiableEmployee.Persistence;
 using Microsoft.Graph;
 using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
@@ -118,12 +119,21 @@ public class MicrosoftGraphDelegatedClient
     public async Task<string> GetGraphApiProfilePhoto(string oid)
     {
         var photo = string.Empty;
+        byte[] photoByte;
+
         using (var photoStream = await _graphServiceClient.Users[oid].Photo
             .Content.GetAsync())
         {
-            byte[] photoByte = ((MemoryStream)photoStream!).ToArray();
-            photo = Base64UrlEncoder.Encode(photoByte);
+            photoByte = ((MemoryStream)photoStream!).ToArray();
         }
+
+        using var imageFromFile = new MagickImage(photoByte);
+        // Sets the output format to jpeg
+        imageFromFile.Format = MagickFormat.Jpeg;
+
+        // Create byte array that contains a jpeg file
+        var data = imageFromFile.ToByteArray();
+        photo = Base64UrlEncoder.Encode(data);
 
         return photo;
     }
