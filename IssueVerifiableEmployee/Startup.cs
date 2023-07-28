@@ -32,7 +32,7 @@ public class Startup
             .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
             .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read"})
             .AddMicrosoftGraph()
-            .AddSessionTokenCaches();
+            .AddDistributedTokenCaches();
 
         services.AddAuthorization(options =>
         {
