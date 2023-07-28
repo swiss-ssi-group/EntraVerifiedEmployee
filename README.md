@@ -107,3 +107,5 @@ https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the
 https://issueverifiableemployee.azurewebsites.net/
 
 https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/
+
+https://github.com/dlemstra/Magick.NET
