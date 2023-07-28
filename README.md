@@ -6,6 +6,7 @@
 
 ### History
 
+- 2023-07-28 Add Magick.NET for photo conversion
 - 2023-07-27 Updated packages
 
 ### Local debugging, required for callback
@@ -64,6 +65,11 @@ https://graph.microsoft.com/v1.0/users/{oid}/photo
 
 You can update the profile photo in the Azure AD portal without a license in the users basic profile settings.
 
+## Used Libraries
+
+- Magick.NET
+- NetEscapades.AspNetCore.SecurityHeaders
+- 
 ## Links
 
 https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-multiple
