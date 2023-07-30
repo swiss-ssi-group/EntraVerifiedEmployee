@@ -109,3 +109,24 @@ https://issueverifiableemployee.azurewebsites.net/
 https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/
 
 https://github.com/dlemstra/Magick.NET
+
+
+## Links eIDAS and EUDI standards
+
+Draft: OAuth 2.0 Attestation-Based Client Authentication
+https://datatracker.ietf.org/doc/html/draft-looker-oauth-attestation-based-client-auth-00
+
+Draft: OpenID for Verifiable Presentations
+https://openid.net/specs/openid-4-verifiable-presentations-1_0.html
+
+Draft: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
+https://datatracker.ietf.org/doc/html/draft-ietf-oauth-dpop
+
+Draft: OpenID for Verifiable Credential Issuance
+https://openid.bitbucket.io/connect/openid-4-verifiable-credential-issuance-1_0.html
+
+Draft: OpenID Connect for Identity Assurance 1.0
+https://openid.net/specs/openid-connect-4-identity-assurance-1_0-13.html
+
+Draft: SD-JWT-based Verifiable Credentials (SD-JWT VC)
+https://vcstuff.github.io/draft-terbu-sd-jwt-vc/draft-terbu-oauth-sd-jwt-vc.html
