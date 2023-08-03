@@ -69,7 +69,7 @@ You can update the profile photo in the Azure AD portal without a license in the
 
 - Magick.NET
 - NetEscapades.AspNetCore.SecurityHeaders
-- 
+
 ## Links
 
 https://learn.microsoft.com/en-us/azure/active-directory/verifiable-credentials/how-to-use-quickstart-multiple
