@@ -6,7 +6,7 @@
 
 ### History
 
-- 2023-12-02 .NET 8
+- 2023-12-02 .NET 8, fix Graph stream handling
 - 2023-07-28 Add Magick.NET for photo conversion
 - 2023-07-27 Updated packages
 
