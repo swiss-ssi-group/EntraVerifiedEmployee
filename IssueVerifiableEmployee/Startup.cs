@@ -1,4 +1,6 @@
+using BffMicrosoftEntraID.Server;
 using IssuerVerifiableEmployee.Services.GraphServices;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Identity.Web;
@@ -28,11 +30,19 @@ public class Startup
 
         services.AddDistributedMemoryCache();
 
+        var scopes = new string[] { "user.read" };
         services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
-            .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read"})
+            .EnableTokenAcquisitionToCallDownstreamApi(scopes)
             .AddMicrosoftGraph()
             .AddDistributedTokenCaches();
+
+        // If using downstream APIs and in memory cache, you need to reset the cookie session if the cache is missing
+        // If you use persistent cache, you do not require this.
+        // You can also return the 403 with the required scopes, this needs special handling for ajax calls
+        // The check is only for single scopes
+        services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme,
+            options => options.Events = new RejectSessionCookieWhenAccountNotInCacheEvents(scopes));
 
         services.AddAuthorization(options =>
         {
