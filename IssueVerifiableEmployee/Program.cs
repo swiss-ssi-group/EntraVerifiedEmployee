@@ -1,18 +1,87 @@
-namespace IssuerVerifiableEmployee;
+using BffMicrosoftEntraID.Server;
+using IssuerVerifiableEmployee;
+using IssuerVerifiableEmployee.Services.GraphServices;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 
-public class Program
+var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
+    serverOptions.AddServerHeader = false;
+});
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder
-                .ConfigureKestrel(options => options.AddServerHeader = false)
-                .UseStartup<Startup>();
-        });
+var services = builder.Services;
+var configuration = builder.Configuration;
+var env = builder.Environment;
+
+services.Configure<KestrelServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
+
+services.Configure<CredentialSettings>(configuration.GetSection("CredentialSettings"));
+services.AddScoped<MicrosoftGraphDelegatedClient>();
+services.AddScoped<IssuerService>();
+
+services.AddDistributedMemoryCache();
+
+var scopes = new string[] { "user.read" };
+services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi(scopes)
+    .AddMicrosoftGraph()
+    .AddDistributedTokenCaches();
+
+// If using downstream APIs and in memory cache, you need to reset the cookie session if the cache is missing
+// If you use persistent cache, you do not require this.
+// You can also return the 403 with the required scopes, this needs special handling for ajax calls
+// The check is only for single scopes
+services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme,
+    options => options.Events = new RejectSessionCookieWhenAccountNotInCacheEvents(scopes));
+
+services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = options.DefaultPolicy;
+});
+
+services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => false;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
+services.AddRazorPages()
+    .AddMvcOptions(options => { })
+    .AddMicrosoftIdentityUI();
+
+var app = builder.Build();
+
+app.UseSecurityHeaders(SecurityHeadersDefinitions
+           .GetHeaderPolicyCollection(env.IsDevelopment()));
+
+
+if (env.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
+app.MapControllers();
+
+app.Run();
