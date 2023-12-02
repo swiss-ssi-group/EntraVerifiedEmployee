@@ -121,10 +121,12 @@ public class MicrosoftGraphDelegatedClient
         var photo = string.Empty;
         byte[] photoByte;
 
+        var streamPhoto = new MemoryStream();
         using (var photoStream = await _graphServiceClient.Users[oid].Photo
             .Content.GetAsync())
         {
-            photoByte = ((MemoryStream)photoStream!).ToArray();
+            photoStream!.CopyTo(streamPhoto);
+            photoByte = streamPhoto!.ToArray();
         }
 
         using var imageFromFile = new MagickImage(photoByte);
