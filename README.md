@@ -120,7 +120,7 @@ https://datatracker.ietf.org/doc/html/draft-looker-oauth-attestation-based-clien
 Draft: OpenID for Verifiable Presentations
 https://openid.net/specs/openid-4-verifiable-presentations-1_0.html
 
-Draft: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
+RFC: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
 https://datatracker.ietf.org/doc/html/draft-ietf-oauth-dpop
 
 Draft: OpenID for Verifiable Credential Issuance
