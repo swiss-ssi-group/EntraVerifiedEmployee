@@ -124,10 +124,10 @@ RFC: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)
 https://datatracker.ietf.org/doc/html/draft-ietf-oauth-dpop
 
 Draft: OpenID for Verifiable Credential Issuance
-https://openid.bitbucket.io/connect/openid-4-verifiable-credential-issuance-1_0.html
+https://openid.github.io/OpenID4VCI/openid-4-verifiable-credential-issuance-wg-draft.html
 
 Draft: OpenID Connect for Identity Assurance 1.0
 https://openid.net/specs/openid-connect-4-identity-assurance-1_0-13.html
 
 Draft: SD-JWT-based Verifiable Credentials (SD-JWT VC)
-https://vcstuff.github.io/draft-terbu-sd-jwt-vc/draft-terbu-oauth-sd-jwt-vc.html
+https://www.ietf.org/archive/id/draft-terbu-oauth-sd-jwt-vc-00.html
