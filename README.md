@@ -111,6 +111,11 @@ https://datatracker.ietf.org/doc/draft-ietf-oauth-selective-disclosure-jwt/
 
 https://github.com/dlemstra/Magick.NET
 
+## Schweiz
+
+- [Swiss E-ID Ecosystem](https://github.com/e-id-admin)
+- [discussion-paper-tech-proposal](https://github.com/e-id-admin/open-source-community/blob/main/discussion-paper-tech-proposal/discussion-paper-tech-proposal.md)
+- [Bundesverwaltung Elektronische Identität](https://www.eid.admin.ch)
 
 ## Links eIDAS and EUDI standards
 
