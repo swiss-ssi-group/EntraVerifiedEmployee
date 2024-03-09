@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-
 namespace IssuerVerifiableEmployee;
 
 public static class SecurityHeadersDefinitions

@@ -26,7 +26,7 @@ public class EmployeeCredentialsModel : PageModel
     public async Task OnGetAsync()
     {
         var oid = User.Claims.FirstOrDefault(t => t.Type == Consts.OID_TYPE);
-        
+
         var employeeData = await _microsoftGraphDelegatedClient
             .GetEmployee(oid!.Value);
 
@@ -51,7 +51,7 @@ public class EmployeeCredentialsModel : PageModel
         else
         {
             EmployeeMessage = $"You have no valid employee, Error: {employeeData.Error}";
-            if(employeeData.Error!.Contains("Preferred Language"))
+            if (employeeData.Error!.Contains("Preferred Language"))
             {
                 PreferredLanguageMissing = true;
             }

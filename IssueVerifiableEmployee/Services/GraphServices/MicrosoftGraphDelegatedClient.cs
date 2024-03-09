@@ -30,14 +30,25 @@ public class MicrosoftGraphDelegatedClient
             return (null, "User MUST have a photo, upload in the Azure portal user basic profile, or using office");
         }
 
-        var user =  await _graphServiceClient.Users[oid]
+        var user = await _graphServiceClient.Users[oid]
             .GetAsync((requestConfiguration) =>
             {
-                requestConfiguration.QueryParameters.Select = [ 
-                    "id", "givenName", "surname", "jobTitle", "displayName",
-                    "mail",  "employeeId", "employeeType", "otherMails",
-                    "mobilePhone", "accountEnabled", "photo", "preferredLanguage",
-                    "userPrincipalName", "identities"];
+                requestConfiguration.QueryParameters.Select = [
+                    "id",
+                    "givenName",
+                    "surname",
+                    "jobTitle",
+                    "displayName",
+                    "mail",
+                    "employeeId",
+                    "employeeType",
+                    "otherMails",
+                    "mobilePhone",
+                    "accountEnabled",
+                    "photo",
+                    "preferredLanguage",
+                    "userPrincipalName",
+                    "identities"];
 
                 requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
             });
@@ -83,7 +94,7 @@ public class MicrosoftGraphDelegatedClient
             Photo = photo,
             AccountEnabled = user.AccountEnabled.GetValueOrDefault()
         };
-    
+
         if (user.Mail != null)
         {
             employee.Mail = user.Mail;

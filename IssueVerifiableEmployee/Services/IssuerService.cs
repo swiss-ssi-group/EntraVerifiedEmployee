@@ -40,7 +40,7 @@ public class IssuerService
 
         payload.Pin.Length = length;
         payload.Pin.Value = newpin;
-  
+
         payload.CredentialsType = "VerifiedEmployee";
 
         //get the manifest from the appsettings, this is the URL to the Verified Employee credential created in the azure portal. 
@@ -57,7 +57,7 @@ public class IssuerService
         payload.Authority = _credentialSettings.IssuerAuthority;
 
         var oid = request.HttpContext.User.Claims.FirstOrDefault(t => t.Type == Consts.OID_TYPE);
-        
+
         var (Employee, Error) = await _microsoftGraphDelegatedClient
             .GetEmployee(oid!.Value);
 
