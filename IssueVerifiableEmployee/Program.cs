@@ -61,7 +61,7 @@ services.AddRazorPages()
 var app = builder.Build();
 
 app.UseSecurityHeaders(SecurityHeadersDefinitions
-           .GetHeaderPolicyCollection(env.IsDevelopment()));
+  .GetHeaderPolicyCollection(env.IsDevelopment()));
 
 
 if (env.IsDevelopment())

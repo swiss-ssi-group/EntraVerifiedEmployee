@@ -33,11 +33,12 @@ public class MicrosoftGraphDelegatedClient
         var user =  await _graphServiceClient.Users[oid]
             .GetAsync((requestConfiguration) =>
             {
-                requestConfiguration.QueryParameters.Select = new string[] { 
+                requestConfiguration.QueryParameters.Select = [ 
                     "id", "givenName", "surname", "jobTitle", "displayName",
                     "mail",  "employeeId", "employeeType", "otherMails",
                     "mobilePhone", "accountEnabled", "photo", "preferredLanguage",
-                    "userPrincipalName", "identities"};
+                    "userPrincipalName", "identities"];
+
                 requestConfiguration.Headers.Add("ConsistencyLevel", "eventual");
             });
 
