@@ -49,7 +49,7 @@ public class IssuerController : ControllerBase
                 var (Token, Error, ErrorDescription) = await _issuerService.GetAccessToken();
                 if (string.IsNullOrEmpty(Token))
                 {
-                    _log.LogError("failed to acquire accesstoken: {Error} : {ErrorDescription}", Error, ErrorDescription);
+                    _log.LogError("failed to acquire access token: {Error} : {ErrorDescription}", Error, ErrorDescription);
                     return BadRequest(new { error = Error, error_description = ErrorDescription });
                 }
 
@@ -58,7 +58,12 @@ public class IssuerController : ControllerBase
 
                 var res = await _httpClient.PostAsJsonAsync(_credentialSettings.Endpoint, payload);
 
-                //var test = await res.Content.ReadAsStringAsync();
+                if(!res.IsSuccessStatusCode)
+                {
+                    var test = await res.Content.ReadAsStringAsync();
+                    _log.LogError("failed to acquire access token: {Error}", test);
+                }
+               
                 var response = await res.Content.ReadFromJsonAsync<IssuanceResponse>();
 
                 if (response == null)
@@ -68,7 +73,7 @@ public class IssuerController : ControllerBase
 
                 if (res.StatusCode == HttpStatusCode.Created)
                 {
-                    _log.LogTrace("succesfully called Request API");
+                    _log.LogTrace("successfully called Request API");
 
                     if (payload.Pin.Value != null)
                     {
@@ -91,7 +96,7 @@ public class IssuerController : ControllerBase
                 {
                     var message = await res.Content.ReadAsStringAsync();
 
-                    _log.LogError("Unsuccesfully called Request API {message}", message);
+                    _log.LogError("Unsuccessfully called Request API {message}", message);
                     return BadRequest(new { error = "400", error_description = "Something went wrong calling the API: " + response });
                 }
             }
