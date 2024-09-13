@@ -16,7 +16,6 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 
 var services = builder.Services;
 var configuration = builder.Configuration;
-var env = builder.Environment;
 
 services.Configure<KestrelServerOptions>(options =>
 {
@@ -61,10 +60,10 @@ services.AddRazorPages()
 var app = builder.Build();
 
 app.UseSecurityHeaders(SecurityHeadersDefinitions
-  .GetHeaderPolicyCollection(env.IsDevelopment()));
+  .GetHeaderPolicyCollection(app.Environment.IsDevelopment()));
 
 
-if (env.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
