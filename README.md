@@ -4,7 +4,7 @@
 
 [Issue Employee verifiable credentials using Entra Verified ID and ASP.NET Core](https://damienbod.com/2023/07/03/issue-employee-verifiable-credentials-using-entra-verified-id-and-asp-net-core/)
 
-### History
+## History
 
 - 2024-12-12 .NET 9, update packages
 - 2024-09-13 Update packages
@@ -13,7 +13,7 @@
 - 2023-07-28 Add Magick.NET for photo conversion
 - 2023-07-27 Updated packages
 
-### Local debugging, required for callback
+## Local debugging, required for callback
 
 Note: the public URL needs to be added to the redirct_url settings in the Azure App registration.
 
@@ -21,7 +21,7 @@ Note: the public URL needs to be added to the redirct_url settings in the Azure 
 ngrok http https://localhost:5001
 ```
 
-### Verified Employee scheme
+## Verified Employee scheme
 
 ```csharp
 public class CredentialsClaims
@@ -45,7 +45,7 @@ public class CredentialsClaims
 }
 ```
 
-### Update the preferredLanguage
+## Update the preferredLanguage
 
 PATCH 
 
@@ -57,7 +57,7 @@ https://graph.microsoft.com/v1.0/users/{oid}
 }
 ```
 
-### Photo with a license
+## Photo with a license
 
 https://portal.office.com/account/?ref=MeControl#personalinfo
 
@@ -65,7 +65,7 @@ https://learn.microsoft.com/en-us/graph/api/profilephoto-update?view=graph-rest-
 
 https://graph.microsoft.com/v1.0/users/{oid}/photo
 
-### Photo
+## Photo
 
 You can update the profile photo in the Azure AD portal without a license in the users basic profile settings.
 
