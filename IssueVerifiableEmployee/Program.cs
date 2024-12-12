@@ -22,6 +22,10 @@ services.Configure<KestrelServerOptions>(options =>
     options.AllowSynchronousIO = true;
 });
 
+services.AddSecurityHeaderPolicies()
+    .SetPolicySelector(ctx => SecurityHeadersDefinitions
+        .GetHeaderPolicyCollection(builder.Environment.IsDevelopment()));
+
 services.Configure<CredentialSettings>(configuration.GetSection("CredentialSettings"));
 services.AddScoped<MicrosoftGraphDelegatedClient>();
 services.AddScoped<IssuerService>();
@@ -59,9 +63,7 @@ services.AddRazorPages()
 
 var app = builder.Build();
 
-app.UseSecurityHeaders(SecurityHeadersDefinitions
-  .GetHeaderPolicyCollection(app.Environment.IsDevelopment()));
-
+app.UseSecurityHeaders();
 
 if (app.Environment.IsDevelopment())
 {
