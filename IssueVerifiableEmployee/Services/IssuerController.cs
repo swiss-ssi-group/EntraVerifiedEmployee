@@ -58,12 +58,12 @@ public class IssuerController : ControllerBase
 
                 var res = await _httpClient.PostAsJsonAsync(_credentialSettings.Endpoint, payload);
 
-                if(!res.IsSuccessStatusCode)
+                if (!res.IsSuccessStatusCode)
                 {
                     var test = await res.Content.ReadAsStringAsync();
                     _log.LogError("failed to acquire access token: {Error}", test);
                 }
-               
+
                 var response = await res.Content.ReadFromJsonAsync<IssuanceResponse>();
 
                 if (response == null)
