@@ -6,7 +6,7 @@
 
 ## History
 
-- 2024-12-12 .NET 9, update packages
+- 2024-12-15 .NET 9, update packages
 - 2024-09-13 Update packages
 - 2024-03-09 Update packages
 - 2023-12-02 .NET 8, fix Graph stream handling
